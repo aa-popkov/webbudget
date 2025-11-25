@@ -1,0 +1,36 @@
+{
+	"name": "webbudget",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"build": "nuxt build",
+		"dev": "nuxt dev --host 0.0.0.0",
+		"generate": "nuxt generate",
+		"preview": "nuxt preview",
+		"postinstall": "nuxt prepare"
+	},
+	"dependencies": {
+		"@nuxt/content": "^3.8.2",
+		"@nuxt/eslint": "^1.10.0",
+		"@nuxt/ui": "^4.2.1",
+		"better-sqlite3": "^12.4.6",
+		"eslint": "^9.39.1",
+		"googleapis": "^166.0.0",
+		"nuxt": "^4.2.1",
+		"nuxt-auth-utils": "^0.5.25",
+		"three": "^0.178.0",
+		"typescript": "^5.9.3",
+		"uuid": "^13.0.0",
+		"vue": "^3.5.24",
+		"vue-router": "^4.6.3",
+		"zod": "^4.1.13"
+	},
+	"devDependencies": {
+		"@iconify-json/lucide": "^1.2.75",
+		"@iconify-json/simple-icons": "^1.2.60",
+		"@iconify-json/streamline-ultimate-color": "^1.2.2",
+		"@types/node": "^24.10.1",
+		"@types/three": "^0.181.0",
+		"jsrepo": "^3.0.4"
+	}
+}
