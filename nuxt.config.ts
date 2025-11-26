@@ -1,4 +1,3 @@
-import { readFileSync } from "node:fs"
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
@@ -7,12 +6,9 @@ export default defineNuxtConfig({
 
   css: ["~/assets/css/main.css"],
   runtimeConfig: {
-    googleSheets: {
-      serviceAccount: JSON.parse(
-        readFileSync("google_service_account.json", {
-          encoding: "utf-8",
-        })
-      ),
+    session: {
+      password: "",
+      maxAge: 60 * 60,
     },
   },
   vite: {

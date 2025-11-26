@@ -5,17 +5,20 @@
 	"scripts": {
 		"build": "nuxt build",
 		"dev": "nuxt dev --host 0.0.0.0",
+		"db:generate": "drizzle-kit generate",
+		"db:migrate": "drizzle-kit migrate",
 		"generate": "nuxt generate",
 		"preview": "nuxt preview",
 		"postinstall": "nuxt prepare"
 	},
 	"dependencies": {
+		"@libsql/client": "^0.15.15",
 		"@nuxt/content": "^3.8.2",
 		"@nuxt/eslint": "^1.10.0",
 		"@nuxt/ui": "^4.2.1",
 		"better-sqlite3": "^12.4.6",
+		"drizzle-orm": "^0.44.7",
 		"eslint": "^9.39.1",
-		"googleapis": "^166.0.0",
 		"nuxt": "^4.2.1",
 		"nuxt-auth-utils": "^0.5.25",
 		"three": "^0.178.0",
@@ -31,6 +34,10 @@
 		"@iconify-json/streamline-ultimate-color": "^1.2.2",
 		"@types/node": "^24.10.1",
 		"@types/three": "^0.181.0",
-		"jsrepo": "^3.0.4"
+		"dotenv": "^17.2.3",
+		"drizzle-kit": "^0.31.7",
+		"jsrepo": "^3.0.4",
+		"prisma": "^7.0.1",
+		"tsx": "^4.20.6"
 	}
 }

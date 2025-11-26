@@ -31,6 +31,20 @@ const providers = [
           icon="i-lucide-user"
           :providers="providers"
         />
+        <UAlert
+          v-if="$route.query.error === 'permission_denied'"
+          color="error"
+          title="Error, Permission Denied"
+          description="You don't have permission to access this App"
+          icon="i-lucide:message-circle-warning"
+        />
+        <UAlert
+          v-if="$route.query.error === 'email_not_verified'"
+          color="error"
+          title="Error, can't get email"
+          description="You don't provide a email"
+          icon="i-lucide:message-circle-warning"
+        />
       </UPageCard>
     </div>
   </div>

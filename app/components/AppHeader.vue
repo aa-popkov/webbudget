@@ -1,5 +1,8 @@
 <script lang="ts" setup>
-import type { NavigationMenuItem } from "@nuxt/ui"
+import type { NavigationMenuItem, DropdownMenuItem } from "@nuxt/ui"
+
+const { clear, loggedIn, user, ready } = useUserSession()
+const router = useRouter()
 
 const navLinks: NavigationMenuItem[] = [
   {
@@ -8,25 +11,48 @@ const navLinks: NavigationMenuItem[] = [
     to: "/",
   },
   {
-    label: "Projects",
-    icon: "i-lucide-folder",
-    to: "/projects",
-  },
-  {
-    label: "Blog",
-    icon: "i-lucide-file-text",
-    to: "/blog",
-  },
-  {
-    label: "Speaking",
-    icon: "i-lucide-mic",
-    to: "/speaking",
+    label: "Budget",
+    icon: "i-game-icons:two-coins",
+    to: "/budget",
   },
   {
     label: "About",
     icon: "i-lucide-user",
     to: "/about",
   },
+]
+const userMenu: DropdownMenuItem[][] = [
+  [
+    {
+      label: user.value?.email,
+    },
+  ],
+  [
+    {
+      label: "Users",
+      icon: "i-lucide-settings",
+      to: "/admin/users",
+      class: user.value?.email === "smile3d007@gmail.com" ? "" : "hidden",
+    },
+  ],
+  [
+    {
+      label: "Profile",
+      icon: "i-lucide-user",
+    },
+    {
+      label: "Logout",
+      icon: "i-lucide-log-out",
+      class: "text-error",
+      ui: {
+        itemLeadingIcon: "text-error",
+      },
+      onClick: async () => {
+        await clear()
+        await router.push("/auth")
+      },
+    },
+  ],
 ]
 </script>
 
@@ -53,32 +79,19 @@ const navLinks: NavigationMenuItem[] = [
 
     <template #right>
       <UColorModeButton />
-
-      <AuthState>
-        <template #default="{ loggedIn, clear, user }">
-          <UAvatar
-            v-if="loggedIn"
-            :src="user?.avatarUrl"
-            size="xs"
-            @click="
-              async () => {
-                await clear()
-                await $router.push('/auth')
-              }
-            "
-          />
-          <UButton
-            v-else
-            color="neutral"
-            variant="ghost"
-            to="/auth"
-            icon="i-lucide:log-in"
-          />
-        </template>
-        <template #placeholder>
-          <USkeleton class="size-8 rounded-full" />
-        </template>
-      </AuthState>
+      <div v-if="ready">
+        <UDropdownMenu v-if="loggedIn" :items="userMenu">
+          <UAvatar :src="user?.avatarUrl" size="xs" />
+        </UDropdownMenu>
+        <UButton
+          v-else
+          color="neutral"
+          variant="ghost"
+          to="/auth"
+          icon="i-lucide:log-in"
+        />
+      </div>
+      <USkeleton v-else class="size-8 rounded-full" />
     </template>
     <template #body>
       <UNavigationMenu

@@ -1,0 +1,34 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1764156571680,
+      "tag": "0000_greedy_firestar",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1764164531837,
+      "tag": "0001_confused_frightful_four",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1764167508844,
+      "tag": "0002_wise_vivisector",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1764169289075,
+      "tag": "0003_flat_darkhawk",
+      "breakpoints": true
+    }
+  ]
+}
