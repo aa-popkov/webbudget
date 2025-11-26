@@ -78,10 +78,11 @@ const userMenu: DropdownMenuItem[][] = [
     />
 
     <template #right>
-      <UColorModeButton />
+      <ColorPaletteButton />
+      <ColorModeButton />
       <div v-if="ready">
         <UDropdownMenu v-if="loggedIn" :items="userMenu">
-          <UAvatar :src="user?.avatarUrl" size="xs" />
+          <UAvatar :src="user?.avatarUrl"  />
         </UDropdownMenu>
         <UButton
           v-else
