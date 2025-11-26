@@ -3,6 +3,7 @@ import { getDatabase } from "~~/database/drizzle"
 import { usersTable } from "~~/database/schema"
 
 export default defineEventHandler(async (event) => {
+  const { user: _ } = await requireUserSession(event)
   const userId = getRouterParam(event, "id")
   if (!userId) {
     throw createError({
@@ -12,7 +13,7 @@ export default defineEventHandler(async (event) => {
     })
   }
   const db = getDatabase()
-  const users = await db.delete(usersTable).where(eq(usersTable.id, userId))
+  const users = await db.delete(usersTable).where(eq(usersTable.id, userId)).returning()
 
   return users
 })

@@ -2,6 +2,7 @@ import { getDatabase } from "~~/database/drizzle"
 import { usersTable } from "~~/database/schema"
 
 export default defineEventHandler(async (event) => {
+  const { user: _ } = await requireUserSession(event)
   const body = await readBody<{ email: string }>(event)
   const db = getDatabase()
 
@@ -12,5 +13,5 @@ export default defineEventHandler(async (event) => {
     })
     .execute()
 
-  return "Hello Nitro"
+  return
 })
