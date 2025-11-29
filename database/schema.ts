@@ -1,4 +1,10 @@
-import { sqliteTable, text, numeric, unique } from "drizzle-orm/sqlite-core"
+import {
+  sqliteTable,
+  text,
+  numeric,
+  unique,
+  integer,
+} from "drizzle-orm/sqlite-core"
 import { v4 as uuidv4 } from "uuid"
 
 export const usersTable = sqliteTable("users_table", {
@@ -24,10 +30,10 @@ export const budgetTable = sqliteTable("budget_table", {
   userId: text()
     .references(() => usersTable.id)
     .notNull(),
-  amount: numeric().notNull(),
-  category: text()
+  amount: numeric({ mode: "number" }).notNull(),
+  categoryId: text()
     .references(() => categoryTable.id)
     .notNull(),
-  date: text(),
-  type: text(),
+  date: text().notNull(),
+  type: integer({ mode: "boolean" }).notNull(),
 })

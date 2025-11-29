@@ -2,12 +2,9 @@ import { eq } from "drizzle-orm"
 import { getDatabase } from "~~/database/drizzle"
 import { usersTable } from "~~/database/schema"
 
-export default defineOAuthGitHubEventHandler({
-  config: {
-    emailRequired: true,
-  },
+export default defineOAuthYandexEventHandler({
   async onSuccess(event, { user, tokens: _ }) {
-    if (!user.email) {
+    if (!user.default_email) {
       throw createError({
         statusCode: 401,
         message: "Email is required",
@@ -17,7 +14,7 @@ export default defineOAuthGitHubEventHandler({
     const userId = await db
       .select()
       .from(usersTable)
-      .where(eq(usersTable.email, user.email))
+      .where(eq(usersTable.email, user.default_email))
       .limit(1)
 
     if (!userId.length) {
@@ -27,8 +24,8 @@ export default defineOAuthGitHubEventHandler({
     await setUserSession(event, {
       user: {
         id: userId[0].id,
-        email: user.email,
-        avatarUrl: user.avatar_url,
+        email: user.default_email,
+        avatarUrl: `https://avatars.yandex.net/get-yapic/${user.default_avatar_id}/islands-50`,
       },
     })
 
@@ -43,7 +40,7 @@ export default defineOAuthGitHubEventHandler({
   },
   // Optional, will return a json error and 401 status code by default
   onError(event, error) {
-    console.error("GitHub OAuth error:", error)
+    console.error("Yandex OAuth error:", error)
     return sendRedirect(event, "/")
   },
 })

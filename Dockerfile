@@ -1,5 +1,5 @@
 # Build Stage 1
-FROM node:24.11.1-alpine3.22 AS build
+FROM node:24.11.1-slim AS build
 WORKDIR /app
 
 # Copy package.json 
@@ -15,7 +15,7 @@ COPY . ./
 RUN npm run build
 
 # Build Stage 2
-FROM node:24.11.1-alpine3.22
+FROM node:24.11.1-slim
 WORKDIR /app
 
 # Only `.output` folder is needed from the build stage

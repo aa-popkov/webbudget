@@ -18,6 +18,16 @@ const providers = [
       window.location.href = "/auth/github"
     },
   },
+  {
+    label: "Yandex",
+    icon: "i-fa7-brands:yandex",
+    onClick: () => {
+      window.location.href = "/auth/yandex"
+    },
+    ui: {
+      leadingIcon: "text-error",
+    },
+  },
 ]
 </script>
 

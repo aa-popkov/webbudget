@@ -9,9 +9,10 @@ import {
 
 const UButton = resolveComponent("UButton")
 const UDropdownMenu = resolveComponent("UDropdownMenu")
+const { $fetchWithHeaders } = useFetchWithHeaders()
 
 const { data, refresh, pending } = await useAsyncData("users", () =>
-  $fetch("/api/user")
+  $fetchWithHeaders("/api/user")
 )
 
 const email = reactive<Partial<UserInput>>({ email: "" })

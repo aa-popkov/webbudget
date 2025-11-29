@@ -2,7 +2,13 @@
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  modules: ["@nuxt/content", "@nuxt/eslint", "@nuxt/ui", "nuxt-auth-utils"],
+  modules: [
+    "@nuxt/content",
+    "@nuxt/eslint",
+    "@nuxt/ui",
+    "nuxt-auth-utils",
+    "nuxt-echarts",
+  ],
 
   css: ["~/assets/css/main.css"],
   runtimeConfig: {
@@ -15,5 +21,11 @@ export default defineNuxtConfig({
     server: {
       allowedHosts: ["tenue.serveo.net"],
     },
+  },
+  echarts: {
+    renderer: ["svg", "canvas"],
+    charts: ["BarChart", "LineChart", "PieChart"],
+    components: ["DatasetComponent", "GridComponent", "TooltipComponent", "TitleComponent", "LegendComponent"],
+    features: ['LabelLayout', 'UniversalTransition']
   },
 })
