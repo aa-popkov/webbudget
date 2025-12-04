@@ -21,7 +21,8 @@ export default defineOAuthGitHubEventHandler({
       .limit(1)
 
     if (!userId.length) {
-      return sendRedirect(event, "/auth?error=permission_denied")
+      console.error("User not found")
+      return sendRedirect(event, "/auth?error=permission_denied", 302)
     }
 
     await setUserSession(event, {
@@ -35,7 +36,7 @@ export default defineOAuthGitHubEventHandler({
     await db
       .update(usersTable)
       .set({
-        lastAuth: new Date().toISOString(),
+        lastAuth: new Date(),
       })
       .where(eq(usersTable.id, userId[0].id))
 

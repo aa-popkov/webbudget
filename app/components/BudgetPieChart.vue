@@ -1,9 +1,12 @@
 <script setup lang="ts">
 const props = defineProps<{
+  title: string,
+  description?: string,
   data: {
     value: number
     name: string
   }[]
+  colors?: string[]
 }>()
 
 const sumByName = (
@@ -26,8 +29,8 @@ const sumByName = (
 
 const option = ref<ECOption>({
   title: {
-    text: "Referer of a Website",
-    subtext: "Fake Data",
+    text: props.title,
+    subtext: props.description,
     left: "center",
   },
   tooltip: {
@@ -43,6 +46,12 @@ const option = ref<ECOption>({
       type: "pie",
       radius: "50%",
       data: sumByName(props.data),
+      label: {
+        position: "inside",
+        formatter: "{d}%",
+        color: "black",
+      },
+      percentPrecision: 0,
       emphasis: {
         itemStyle: {
           shadowBlur: 10,
@@ -52,6 +61,12 @@ const option = ref<ECOption>({
       },
     },
   ],
+})
+
+onMounted(() => {
+  if (props.colors) {
+    option.value.color = props.colors
+  }
 })
 </script>
 

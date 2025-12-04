@@ -15,17 +15,22 @@ export default defineNuxtConfig({
     session: {
       password: "",
       maxAge: 60 * 60,
-    },
-  },
-  vite: {
-    server: {
-      allowedHosts: ["tenue.serveo.net"],
+      cookie: {
+        httpOnly: true,
+        sameSite: "lax",
+      },
     },
   },
   echarts: {
     renderer: ["svg", "canvas"],
     charts: ["BarChart", "LineChart", "PieChart"],
-    components: ["DatasetComponent", "GridComponent", "TooltipComponent", "TitleComponent", "LegendComponent"],
-    features: ['LabelLayout', 'UniversalTransition']
+    components: [
+      "DatasetComponent",
+      "GridComponent",
+      "TooltipComponent",
+      "TitleComponent",
+      "LegendComponent",
+    ],
+    features: ["LabelLayout", "UniversalTransition"],
   },
 })

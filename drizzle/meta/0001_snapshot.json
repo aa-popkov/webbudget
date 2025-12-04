@@ -1,176 +1,191 @@
 {
-  "version": "6",
-  "dialect": "sqlite",
-  "id": "94afbfea-c935-4303-a60e-d01153efef14",
-  "prevId": "873a7d91-19e3-48d4-8f4a-8a20e18853d6",
+  "id": "bdd2259f-fe91-49d7-8da0-a9c7fd803f39",
+  "prevId": "5e171df8-6565-467a-acf8-099cb5891994",
+  "version": "7",
+  "dialect": "postgresql",
   "tables": {
-    "budget_table": {
-      "name": "budget_table",
+    "public.budget": {
+      "name": "budget",
+      "schema": "",
       "columns": {
         "id": {
           "name": "id",
-          "type": "text",
+          "type": "uuid",
           "primaryKey": true,
           "notNull": true,
-          "autoincrement": false,
-          "default": "'b1f59135-5864-43d2-8f6e-79be9fc5dd14'"
+          "default": "gen_random_uuid()"
         },
         "userId": {
           "name": "userId",
-          "type": "text",
+          "type": "uuid",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
         "amount": {
           "name": "amount",
           "type": "numeric",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
-        "category": {
-          "name": "category",
-          "type": "text",
+        "categoryId": {
+          "name": "categoryId",
+          "type": "uuid",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
         "date": {
           "name": "date",
-          "type": "text",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": true
         },
         "type": {
           "name": "type",
-          "type": "text",
+          "type": "boolean",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": true
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "budget_table_userId_users_table_id_fk": {
-          "name": "budget_table_userId_users_table_id_fk",
-          "tableFrom": "budget_table",
-          "tableTo": "users_table",
+        "budget_userId_user_id_fk": {
+          "name": "budget_userId_user_id_fk",
+          "tableFrom": "budget",
+          "tableTo": "user",
           "columnsFrom": [
             "userId"
           ],
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "budget_table_category_category_table_id_fk": {
-          "name": "budget_table_category_category_table_id_fk",
-          "tableFrom": "budget_table",
-          "tableTo": "category_table",
+        "budget_categoryId_category_id_fk": {
+          "name": "budget_categoryId_category_id_fk",
+          "tableFrom": "budget",
+          "tableTo": "category",
           "columnsFrom": [
-            "category"
+            "categoryId"
           ],
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
-      "checkConstraints": {}
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
-    "category_table": {
-      "name": "category_table",
+    "public.category": {
+      "name": "category",
+      "schema": "",
       "columns": {
         "id": {
           "name": "id",
-          "type": "text",
+          "type": "uuid",
           "primaryKey": true,
           "notNull": true,
-          "autoincrement": false,
-          "default": "'ec9ec08b-7e39-49ea-8533-bb447ca45f8f'"
+          "default": "gen_random_uuid()"
         },
         "userId": {
           "name": "userId",
-          "type": "text",
+          "type": "uuid",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
         "name": {
           "name": "name",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": true
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "category_table_userId_users_table_id_fk": {
-          "name": "category_table_userId_users_table_id_fk",
-          "tableFrom": "category_table",
-          "tableTo": "users_table",
+        "category_userId_user_id_fk": {
+          "name": "category_userId_user_id_fk",
+          "tableFrom": "category",
+          "tableTo": "user",
           "columnsFrom": [
             "userId"
           ],
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "checkConstraints": {}
+      "uniqueConstraints": {
+        "category_userId_name_unique": {
+          "name": "category_userId_name_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "userId",
+            "name"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
-    "users_table": {
-      "name": "users_table",
+    "public.user": {
+      "name": "user",
+      "schema": "",
       "columns": {
         "id": {
           "name": "id",
-          "type": "text",
+          "type": "uuid",
           "primaryKey": true,
           "notNull": true,
-          "autoincrement": false,
-          "default": "'46fda85b-8130-440d-984d-4fb8eef1f103'"
+          "default": "gen_random_uuid()"
         },
         "email": {
           "name": "email",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
         "lastAuth": {
           "name": "lastAuth",
-          "type": "text",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         }
       },
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "checkConstraints": {}
+      "uniqueConstraints": {
+        "user_email_unique": {
+          "name": "user_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     }
   },
-  "views": {},
   "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
   "_meta": {
+    "columns": {},
     "schemas": {},
-    "tables": {},
-    "columns": {}
-  },
-  "internal": {
-    "indexes": {}
+    "tables": {}
   }
 }

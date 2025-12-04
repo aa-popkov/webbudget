@@ -1,5 +1,5 @@
 import "dotenv/config"
-import { drizzle } from "drizzle-orm/libsql"
+import { drizzle } from 'drizzle-orm/node-postgres';
 import { usersTable } from "./schema"
 import { eq } from "drizzle-orm"
 
@@ -17,8 +17,9 @@ const initAdminEmail = async () => {
     .select()
     .from(usersTable)
     .where(eq(usersTable.email, adminEmail))
+    .limit(1)
     .execute()
-  if (adminUser) {
+  if (adminUser.length) {
     console.log("ADMIN_EMAIL is already set")
     return
   }

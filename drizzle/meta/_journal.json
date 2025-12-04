@@ -1,47 +1,33 @@
 {
   "version": "7",
-  "dialect": "sqlite",
+  "dialect": "postgresql",
   "entries": [
     {
       "idx": 0,
-      "version": "6",
-      "when": 1764156571680,
-      "tag": "0000_greedy_firestar",
+      "version": "7",
+      "when": 1764747492392,
+      "tag": "0000_tired_magik",
       "breakpoints": true
     },
     {
       "idx": 1,
-      "version": "6",
-      "when": 1764164531837,
-      "tag": "0001_confused_frightful_four",
+      "version": "7",
+      "when": 1764748968840,
+      "tag": "0001_violet_zarek",
       "breakpoints": true
     },
     {
       "idx": 2,
-      "version": "6",
-      "when": 1764167508844,
-      "tag": "0002_wise_vivisector",
+      "version": "7",
+      "when": 1764787431475,
+      "tag": "0002_dazzling_tarot",
       "breakpoints": true
     },
     {
       "idx": 3,
-      "version": "6",
-      "when": 1764169289075,
-      "tag": "0003_flat_darkhawk",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "6",
-      "when": 1764233425819,
-      "tag": "0004_smiling_jane_foster",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "6",
-      "when": 1764233737160,
-      "tag": "0005_flawless_fallen_one",
+      "version": "7",
+      "when": 1764788711805,
+      "tag": "0003_swift_frog_thor",
       "breakpoints": true
     }
   ]

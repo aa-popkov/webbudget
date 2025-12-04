@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
       userId: user.id,
       amount: body.amount,
       categoryId: body.categoryId,
-      date: body.date,
+      date: new Date(body.date),
       type: body.type,
     })
     .execute()

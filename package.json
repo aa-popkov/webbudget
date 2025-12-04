@@ -12,11 +12,10 @@
 		"postinstall": "nuxt prepare"
 	},
 	"dependencies": {
-		"@libsql/client": "^0.15.15",
 		"@nuxt/content": "^3.8.2",
 		"@nuxt/eslint": "^1.10.0",
 		"@nuxt/ui": "^4.2.1",
-		"better-sqlite3": "^12.4.6",
+		"better-sqlite3": "^12.5.0",
 		"drizzle-orm": "^0.44.7",
 		"echarts": "^6.0.0",
 		"eslint": "^9.39.1",
@@ -24,6 +23,7 @@
 		"nuxt-auth-utils": "^0.5.25",
 		"nuxt-charts": "^1.0.2",
 		"nuxt-echarts": "^1.0.1",
+		"pg": "^8.16.3",
 		"three": "^0.178.0",
 		"typescript": "^5.9.3",
 		"uuid": "^13.0.0",
@@ -39,11 +39,11 @@
 		"@iconify-json/simple-icons": "^1.2.60",
 		"@iconify-json/streamline-ultimate-color": "^1.2.2",
 		"@types/node": "^24.10.1",
+		"@types/pg": "^8.15.6",
 		"@types/three": "^0.181.0",
 		"dotenv": "^17.2.3",
 		"drizzle-kit": "^0.31.7",
 		"jsrepo": "^3.0.4",
-		"prisma": "^7.0.1",
 		"tsx": "^4.20.6"
 	}
 }

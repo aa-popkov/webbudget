@@ -3,6 +3,8 @@ definePageMeta({
   public: "true",
 })
 
+const { clear } = useUserSession()
+
 const providers = [
   {
     label: "Google",
@@ -29,6 +31,10 @@ const providers = [
     },
   },
 ]
+
+onMounted(async () => {
+  await clear()
+})
 </script>
 
 <template>

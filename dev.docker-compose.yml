@@ -1,0 +1,30 @@
+volumes:
+  webbudget_devdb:
+    name: webbudget_devdb
+
+services:
+  webbudget_devdb:
+    container_name: webbudget_devdb
+    hostname: webbudget_devdb
+    image: postgres:14.8-alpine3.18
+    environment:
+      POSTGRES_DB: webbudget_devdb
+      POSTGRES_USER: webbudget
+      POSTGRES_PASSWORD: webbudget
+      PGDATA: /var/lib/postgresql/data/db-files/
+    volumes:
+      - webbudget_devdb:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U webbudget -d webbudget_devdb" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 4G

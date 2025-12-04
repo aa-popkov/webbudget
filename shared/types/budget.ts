@@ -1,12 +1,11 @@
 import z from "zod"
-import { getLocalTimeZone, today } from "@internationalized/date"
 
 export const BudgetAmountZodSchema = z.object({
   id: z.uuidv4(),
   userId: z.uuidv4(),
   amount: z.float64("Required"),
   categoryId: z.uuidv4("Required"),
-  date: z.string("Required").default(today(getLocalTimeZone()).toString()),
+  date: z.string("Required"),
   type: z.boolean().default(false),
 })
 export type BudgetAmount = z.infer<typeof BudgetAmountZodSchema>

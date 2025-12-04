@@ -1,39 +1,50 @@
 import {
-  sqliteTable,
+  pgTable,
+  uuid,
   text,
-  numeric,
   unique,
-  integer,
-} from "drizzle-orm/sqlite-core"
-import { v4 as uuidv4 } from "uuid"
+  numeric,
+  timestamp,
+  boolean,
+} from "drizzle-orm/pg-core"
+import { sql } from "drizzle-orm"
 
-export const usersTable = sqliteTable("users_table", {
-  id: text().primaryKey().$defaultFn(uuidv4).notNull(),
+export const usersTable = pgTable("user", {
+  id: uuid()
+    .primaryKey()
+    .default(sql`gen_random_uuid()`)
+    .notNull(),
   email: text().unique().notNull(),
-  lastAuth: text(),
+  lastAuth: timestamp(),
 })
 
-export const categoryTable = sqliteTable(
-  "category_table",
+export const categoryTable = pgTable(
+  "category",
   {
-    id: text().primaryKey().$defaultFn(uuidv4).notNull(),
-    userId: text()
-      .references(() => usersTable.id)
+    id: uuid()
+      .primaryKey()
+      .default(sql`gen_random_uuid()`)
+      .notNull(),
+    userId: uuid()
+      .references(() => usersTable.id, { onDelete: "cascade" })
       .notNull(),
     name: text().notNull(),
   },
   (t) => [unique().on(t.userId, t.name)]
 )
 
-export const budgetTable = sqliteTable("budget_table", {
-  id: text().primaryKey().$defaultFn(uuidv4).notNull(),
-  userId: text()
-    .references(() => usersTable.id)
+export const budgetTable = pgTable("budget", {
+  id: uuid()
+    .primaryKey()
+    .default(sql`gen_random_uuid()`)
+    .notNull(),
+  userId: uuid()
+    .references(() => usersTable.id, { onDelete: "cascade" })
     .notNull(),
   amount: numeric({ mode: "number" }).notNull(),
-  categoryId: text()
-    .references(() => categoryTable.id)
+  categoryId: uuid()
+    .references(() => categoryTable.id, { onDelete: "cascade" })
     .notNull(),
-  date: text().notNull(),
-  type: integer({ mode: "boolean" }).notNull(),
+  date: timestamp({ mode: "date", withTimezone: true }).notNull(),
+  type: boolean().notNull(),
 })
