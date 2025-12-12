@@ -83,7 +83,7 @@ const date = computed({
         <UButton color="neutral" variant="subtle" icon="i-lucide-calendar">
           {{ calendarDate ? formatDate(calendarDate) : "Select a date" }}
         </UButton>
-
+c
         <template #content>
           <UCalendar v-model="date" class="p-2" />
         </template>

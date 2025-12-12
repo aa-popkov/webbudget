@@ -1,14 +1,27 @@
 <script lang="ts" setup>
 import { getLocalTimeZone, today } from "@internationalized/date"
+import useDateGenerate from "~/composables/dateGenerate"
 
 const { $fetchWithHeaders } = useFetchWithHeaders()
+const { generateDateRange } = useDateGenerate()
 
 const dateRange = ref({
   start: today(getLocalTimeZone()).subtract({ weeks: 1 }),
   end: today(getLocalTimeZone()),
 })
+
 const daRangeTs = computed(() => {
+  if (!dateRange.value.end) {
+    return []
+  }
   return `${dateRange.value.start.toDate(getLocalTimeZone()).toISOString()}--${dateRange.value.end.toDate(getLocalTimeZone()).toISOString()}`
+})
+
+const dateArr = computed(() => {
+  if (!dateRange.value.end) {
+    return []
+  }
+  return generateDateRange(dateRange.value.start, dateRange.value.end)
 })
 
 const {
@@ -60,6 +73,22 @@ const {
             }) ?? []
           "
           :colors="['#ff6467', '#05df72']"
+        />
+      </UCard>
+
+      <UCard class="col-span-2">
+        <BudgetBarChart
+          v-if="!pendingBudget"
+          :range="dateArr.map((x) => x.toString())"
+          :data="
+            dataBudget?.map((x) => {
+              return {
+                name: x.type ? 'Income' : 'Expense',
+                value: x.amount,
+                date: x.date
+              }
+            }) ?? []
+          "
         />
       </UCard>
     </div>
